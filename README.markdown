@@ -11,7 +11,7 @@ http://www.craigdunn.org/2012/05/239/
 Apache 2.0 - http://www.apache.org/licenses/LICENSE-2.0.txt
 
 # Contact
-Nathan Valentine <nrvale0@gmail.com|nathan@puppetlabs.com>
+Nathan Valentine &lt;nrvale0@gmail.com|nathan@puppetlabs.com&gt;
 
 # Support
 See Contact.
