@@ -2,7 +2,7 @@
   "name": "nrvale0-site",
   "version": "1.0.4",
   "author": "Nathan Valentine <nrvale0@gmail.com|nathan@puppetlabs.com>",
-  "summary": "Puppet 'site' module demostrating basic Roles and Profiles layout',
+  "summary": "Puppet 'site' module demostrating basic Roles and Profiles layout",
   "license": "Apache 2.0",
   "source": "https://github.com/nrvale0/puppet-site",
   "project_page": "https://github.com/nrvale0/puppet-site",
@@ -12,7 +12,7 @@
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 3.2.1"
     },
-    }
+    { 
       "name": "puppetlabs/ntp",
       "version_requirement": ">= 3.0.3"
     },
@@ -21,7 +21,7 @@
       "version_requirement": ">= 1.0.3"
     }
   ],
-"operatingsystem_support": [
+  "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
