@@ -1,5 +1,4 @@
 # perhaps all nodes at your site use this as a base?
-
 class site::profile::base(
   $ntp_servers = $::site::params::ntp_servers,
   $hosts = {}
@@ -15,6 +14,4 @@ class site::profile::base(
   # create some default host entries
   $hosts_defaults = { 'ensure' => present }
   create_resources('host', $hosts, $hosts_defaults)
-
-  notify { '::site::profile::base': }
 }
