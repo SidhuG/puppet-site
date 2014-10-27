@@ -1,9 +1,11 @@
 class site::profile::puppet::agent(
   $master = 'puppet',
-  $environment = 'production'
+  $environment = 'production',
+  $is_enterprise = true
 ) inherits ::site::params {
 
-  validate_string($master, $environment)
+  multi_validate_re($master, $environment, '^.+$')
+  validate_bool($is_enterprise)
 
   require ::site::profile::base
 
@@ -22,6 +24,4 @@ class site::profile::puppet::agent(
     setting => 'environment',
     value => $environment,
   }
-
-  notify { '::site::profile::puppet::agent': }
 }

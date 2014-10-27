@@ -9,6 +9,10 @@
   "issues_url": "https://github.com/nrvale0/puppet-site/issues",
   "dependencies": [
     {
+      "name": "zack/r10k",
+      "version_requirement": ">=2.3.0"
+    },
+    {
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 3.2.1"
     },
@@ -19,6 +23,10 @@
     {
       "name": "puppetlabs/inifile",
       "version_requirement": ">= 1.0.3"
+    },
+    {
+      "name": "nrvale0/multi_validate_re",
+      "version_requirement": ">=0.1.1"
     }
   ],
   "operatingsystem_support": [
