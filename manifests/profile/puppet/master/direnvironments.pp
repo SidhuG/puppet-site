@@ -1,23 +1,23 @@
 class site::profile::puppet::master::direnvironments(
-  $environmentspath = $::site::profile::puppet::master::directoryenvironments_path
-) {
-  validate_absolute_path($environmentspath)
+  $directory_environments_path = $::site::profile::puppet::master::directory_environments_path
+) inherits ::site::profile::puppet::master::params {
+
+  validate_absolute_path($directory_environments_path)
  
   ini_setting { 'set Puppet directory-based environments path':
     ensure => present,
     path => "${::settings::confdir}/puppet.conf",
     section => 'master',
     setting => 'environmentpath',
-    value => $environmentspath,
+    value => $directory_environments_path,
   }
 
-  if !defined(File[$environmentspath]) {
-    file { 'Puppet environments directory':
+  if !defined(File[$directory_environments_path]) {
+    file { $directory_environments_path:
       ensure => directory,
-      path => $environmentspath,
       owner => 'root',
       group => 'root',
-      mode => '0600',
+      mode => '0640',
     }
   }
 }
