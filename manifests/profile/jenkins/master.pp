@@ -1,13 +1,16 @@
 class site::profile::jenkins::master(
-  $plugins = {}
+  $plugins = {},
+  $jobs = {},
 ) inherits ::site::params {
   require ::site::profile::jenkins
 
-  validate_hash($plugins)
+  validate_hash($plugins, $jobs)
 
   # puppetlabs/firewall appears to be broken for CentOS7/systemd right now
-  class { '::firewall': ensure => stopped, }
-  class { '::jenkins': configure_firewall => true, }
+  class { '::jenkins': 
+    configure_firewall => true,
+    job_hash => $jobs,
+  }
 
   include ::git
 
