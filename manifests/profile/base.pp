@@ -6,8 +6,6 @@ class site::profile::base(
   $extra_packages = hiera_hash('::site::profile::base::extra_packages', {})
 ) {
 
-  notice("extra_packages: ${extra_packages}")
-
   validate_array($ntp_servers)
   validate_hash($hosts, $extra_packages, $extra_repos)
 

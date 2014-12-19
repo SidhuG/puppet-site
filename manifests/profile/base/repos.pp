@@ -8,12 +8,16 @@ class site::profile::base::repos(
   case $::osfamily {
     'redhat': {
       $repo_type = 'yumrepo'
-      if $enable_epel { require ::epel }
+      if $enable_epel {
+        require ::epel
+        Package <||> { require +> Class['::epel'], }
+      }
     }
 
     'debian': {
       $repo_type = 'apt::source'
       require ::apt
+      Package <||> { require +> Class['::apt'], }
     }
 
     default: {fail("OS family ${::osfamily} not supported by this class!")}
