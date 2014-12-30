@@ -1,0 +1,112 @@
+---
+- scm:
+    name: <%= @repo_uri %>
+    scm:
+      - git:
+          url: <%= @repo_uri %>
+
+- wrapper:
+    name: '<%= @name %>-wrappers'
+    wrappers:
+      - ansicolors
+
+- job-template:
+    name: '<%= @name %>-puppet-module-init'
+    description: 'Initialize the Workspace for testing of Puppet module <%= @name %>'
+    scm:
+      - <%= @repo_uri %>
+    builders:
+      - shell: "/bin/bash --login -c 'rbenv versions && gem list --local'"
+      - shell: "/bin/bash --login -c 'bundle install --standalone && zip -r <%= @name %>.zip ./'"
+    publishers:
+      - archive:
+          artifacts: '<%= @name %>.zip'
+          allow-empty: false
+          fingerprint: true
+
+- job-template:
+    name: '<%= @name %>-puppet-module-syntax'
+    description: 'Syntax checking of Puppet module <%= @name %>'
+    triggers:
+      - build-result:
+          cron: '* * * * *'
+          groups:
+            - jobs:
+                - '<%= @name %>-puppet-module-init'
+          results:
+            - stable
+    builders:
+      - copyartifact:
+          project: '<%= @name %>-puppet-module-init'
+          filter: '<%= @name %>.zip'
+      - shell: "/bin/bash --login -c 'unzip -o <%= @name %>.zip && bundle exec rake syntax'"
+
+- job-template:
+    name: '<%= @name %>-puppet-module-lint'
+    description: 'puppet-lint checking of Puppet module <%= @name %>'
+    triggers:
+      - build-result:
+          cron: '* * * * *'
+          groups:
+            - jobs:
+                - '<%= @name %>-puppet-module-syntax'
+          results:
+            - stable
+    builders:
+      - copyartifact:
+          project: '<%= @name %>-puppet-module-init'
+          filter: '<%= @name %>.zip'
+      - shell: "/bin/bash --login -c 'unzip -o <%= @name %>.zip && bundle exec rake lint'"
+
+- job-template:
+    name: '<%= @name %>-puppet-module-unit'
+    description: 'Unit/spec test of Puppet module <%= @name %>'
+    triggers:
+      - build-result:
+          cron: '* * * * *'
+          groups:
+            - jobs:
+                - '<%= @name %>-puppet-module-syntax'
+          results:
+            - stable
+    builders:
+      - copyartifact:
+          project: '<%= @name %>-puppet-module-init'
+          filter: '<%= @name %>.zip'
+      - shell: "/bin/bash --login -c 'unzip -o <%= @name %>.zip && bundle exec rake spec'"
+
+- job-template:
+    name: '<%= @name %>-puppet-module-acceptance'
+    description: 'Acceptance/beaker test of Puppet module <%= @name %>'
+    triggers:
+      - build-result:
+          cron: '* * * * *'
+          groups:
+            - jobs:
+                - '<%= @name %>-puppet-module-unit'
+          results:
+            - stable
+    builders:
+      - copyartifact:
+          project: '<%= @name %>-puppet-module-init'
+          filter: '<%= @name %>.zip'
+      - shell: "/bin/bash --login -c 'unzip -o <%= @name %>.zip && for i in ./spec/acceptance/nodesets/docker*; do BEAKER_setfile=$i bundle exec rake acceptance; done'"
+
+- job-group:
+    name: '<%= @name %>-puppet-module-tests'
+    description: 'multi-level Puppet module testing for <%= @name %>'
+    jobs:
+      - '<%= @name %>-puppet-module-init'
+      - '<%= @name %>-puppet-module-syntax'
+      - '<%= @name %>-puppet-module-lint'
+      - '<%= @name %>-puppet-module-unit'
+      - '<%= @name %>-puppet-module-acceptance'
+
+- project:
+    name: <%= @name %>
+    description: '<%= @name %> Puppet module testing '
+    retry-count: 2
+    wrappers:
+      - <%= @name %>-wrappers
+    jobs:
+      - '<%= @name %>-puppet-module-tests'
