@@ -10,7 +10,8 @@ end
 group :development do
   gem "travis"
   gem "travis-lint"
-  gem "beaker"
+#  gem "beaker"
+  gem "beaker", :git => 'https://github.com/nrvale0/beaker.git'
   gem "beaker-rspec"
   gem "vagrant-wrapper"
   gem "puppet-blacksmith"

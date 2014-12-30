@@ -5,10 +5,8 @@
       - git:
           url: <%= @repo_uri %>
 
-- wrapper:
-    name: '<%= @name %>-wrappers'
-    wrappers:
-      - ansicolors
+- wrappers:
+  - ansicolor
 
 - job-template:
     name: '<%= @name %>-puppet-module-init'
@@ -106,7 +104,5 @@
     name: <%= @name %>
     description: '<%= @name %> Puppet module testing '
     retry-count: 2
-    wrappers:
-      - <%= @name %>-wrappers
     jobs:
       - '<%= @name %>-puppet-module-tests'
