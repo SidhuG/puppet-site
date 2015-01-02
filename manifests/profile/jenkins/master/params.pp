@@ -34,7 +34,11 @@ class site::profile::jenkins::master::params inherits ::site::params {
     'buildgraph-view' => { 'version' => '1.1.1' },
     'build-flow-plugin' => { 'version' => '0.17' },
     'greenballs' => { 'version' => '1.14' },
-    'workflow-aggregator' => { 'version' => '1.0' }
+    'workflow-aggregator' => { 'version' => '1.0' },
+    'jquery' => { 'version' => '1.7.2-1' },
+    'dashboard-view' => { 'version' => '2.2' },
+    'build-pipeline-plugin' => { 'version' => '1.4' },
+    'next-executions' => { 'version' => '1.0.9' }
   }
 
 }

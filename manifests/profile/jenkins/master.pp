@@ -7,6 +7,7 @@ class site::profile::jenkins::master(
   require ::site::profile::jenkins
 
   validate_hash($plugins, $jobs, $jjb_pipelines)
+  validate_re($::resolv_conf_nameservers, '^.+$')
 
   include ::git
   include ::rbenv
@@ -17,8 +18,8 @@ class site::profile::jenkins::master(
     notify +> Class[::jenkins::service],
   }
 
-  class { '::docker': dns => $::resolve_config_nameservers, } ->
-  docker::image { 'jpetazzo/nsenter': ensure => latest, } ->
+  class { '::docker': dns => $::resolv_conf_nameservers, } ->
+  docker::image { 'jpetazzo/nsenter': ensure => present, } ->
 
   exec { 'install docker nsenter':
     path => ['/bin','/sbin','/usr/bin','/usr/sbin'],
