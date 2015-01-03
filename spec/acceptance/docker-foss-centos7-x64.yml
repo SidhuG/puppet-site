@@ -1,0 +1,8 @@
+HOSTS:
+  centos7-x86_64:
+    platform: el-7-x86_64
+    image: centos:centos7
+    hypervisor : docker
+    docker_cmd: '["/sbin/init"]'
+CONFIG:
+  type: foss
