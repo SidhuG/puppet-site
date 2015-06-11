@@ -1,4 +1,3 @@
-class site::role inherits site::role::params {
-  require site
-  notify { "site::role": }
+class site::role inherits ::site::params {
+  require ::site
 }

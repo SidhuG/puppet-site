@@ -1,0 +1,24 @@
+{
+  "name": "nrvale0-site",
+  "version": "2.0.0",
+  "author": "Nathan Valentine - < nrvale0@gmail.com | nathan@puppetlabs.com >",
+  "summary": "A site module with common Roles and Profiles.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/nrvale0/puppet-site",
+  "project_page": "https://github.com/nrvale0/puppet-site",
+  "issues_url": "https://github.com/nrvale0/puppet-site/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04"
+      ]
+    }
+  ]
+}

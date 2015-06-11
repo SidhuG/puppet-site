@@ -1,0 +1,14 @@
+fixtures:
+  repositories:
+    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
+    r10k: "https://github.com/acidprime/r10k.git"
+    git: "https://github.com/puppetlabs/puppetlabs-git.git"
+    ruby: "https://github.com/puppetlabs/puppetlabs-ruby.git"
+    gcc: "https://github.com/puppetlabs/puppetlabs-gcc.git"
+    pe_gem: "https://github.com/puppetlabs/puppetlabs-pe_gem.git"
+    make: "https://github.com/croddy/puppet-make.git"
+    inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
+    vcsrepo: "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
+  symlinks:
+    site: "#{source_dir}"
