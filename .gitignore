@@ -1,4 +1,8 @@
-*swp
-.vagrant
-*.lock
+.*.sw?
 log
+pkg
+spec/fixtures
+.rspec_system
+.vagrant
+;
+Gemfile.lock
