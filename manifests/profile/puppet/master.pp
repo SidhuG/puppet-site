@@ -18,4 +18,6 @@ class site::profile::puppet::master(
     target => '/etc/puppetlabs/puppet/environments/production',
     notify => Service['pe-puppetmaster'],
   }
+
+  require ::grafanadash::dev
 }

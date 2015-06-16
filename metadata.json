@@ -27,6 +27,10 @@
     {
       "name": "zack-r10k",
       "version_requirement": ">= 2.8.0"
+    },
+    {
+      "name": "cprice404-grafanadash",
+      "version_requirement": ">= 0.0.5"
     }
   ],
   "operatingsystem_support": [
