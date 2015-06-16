@@ -6,6 +6,7 @@ class site::profile::puppet::master(
 
   require ::site::profile::base
 
+  require ::git
   unless false == $enable_r10k { require ::r10k }
 
   $environments_dir = '/etc/puppetlabs/puppet/environments'
