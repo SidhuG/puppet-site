@@ -10,12 +10,7 @@ class site::profile::puppet::master(
   unless false == $enable_r10k { require ::r10k }
 
   $environments_dir = '/etc/puppetlabs/puppet/environments'
-  file { $environments_dir:
-    ensure => directory,
-    mode => 0755,
-    owner => 'root',
-    group => 'root',
-  }
+  ensure_resource($environments_dir, { 'ensure' => 'directory' })
 
   file { 'hiera router config':
     ensure => link,
