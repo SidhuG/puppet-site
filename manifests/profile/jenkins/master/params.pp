@@ -13,6 +13,9 @@ class site::profile::jenkins::master::params inherits ::site::params {
       $jenkins_user = 'jenkins'
       $docker_group = 'docker'
     }
+    'Debian': {
+    
+    }
     default: {fail("OS family ${::osfamily} not supported!")}
   }
 
