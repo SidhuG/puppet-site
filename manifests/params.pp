@@ -1,5 +1,6 @@
 class site::params {
-  unless 'ubuntu' == $::operatingsystem and '14.04' == $::operatingsystemrelease {
-    fail("Operating system ${::operatingsystem} ${operatingsystemrelease} not supported!")
+  case $osfamily {
+    'redhat','debian': {}
+    default: { fail("Operating system ${::operatingsystem} ${operatingsystemrelease} not supported!") }
   }
 }
