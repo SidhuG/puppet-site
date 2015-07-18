@@ -1,5 +1,5 @@
 class site::profile::base(
-  $configure_firewall = false
+  $configure_firewall = false,
 ) inherits ::site::params {
 
   require ::ntp
@@ -7,4 +7,6 @@ class site::profile::base(
 
   validate_bool($configure_firewall)
   unless ! $configure_firewall { require ::firewall }
+
+  unless 'redhat' != $::osfamily { require ::epel }
 }
