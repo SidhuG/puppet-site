@@ -5,7 +5,8 @@ class site::profile::jenkins::master(
 ) inherits ::site::profile::jenkins::master::params {
 
   require ::site::profile::jenkins
-
+  require ::site::profile::base
+  
   validate_hash($plugins, $jobs, $jjb_pipelines)
   validate_re($::resolv_conf_nameservers, '^.+$')
 
