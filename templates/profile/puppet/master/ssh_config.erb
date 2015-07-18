@@ -1,0 +1,6 @@
+# WARNING -- This file managed by Puppet!
+
+# key for r10k control repo
+Host <%= @r10k_control_repo_server %>
+  User <%= @r10k_control_repo_username %>
+  IdentityFile /root/.ssh/r10k-<%= @r10k_control_repo_username %>.key
